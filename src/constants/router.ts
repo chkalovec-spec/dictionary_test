@@ -10,13 +10,18 @@ export enum AllRoutes {
   ABOUT = '/about',
 }
 
-export const privateRoutes = [
+type Route = {
+  path: AllRoutes
+  component: () => JSX.Element
+}
+
+export const privateRoutes: Route[] = [
   {
     path: AllRoutes.DICTIONARY,
     component: DictionaryPage,
   },
 ]
-export const publicRoutes = [
+export const publicRoutes: Route[] = [
   {
     path: AllRoutes.INDEX,
     component: MainPage,

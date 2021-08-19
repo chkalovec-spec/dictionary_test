@@ -1,8 +1,18 @@
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+import { selectUserInfo } from '../store/userSlice'
+
 import { AllRoutes, privateRoutes, publicRoutes } from '../constants/router'
 
 export const AppRouter = () => {
-  const isAuth = false
+  const { isAuth } = useSelector(selectUserInfo)
+  const location = useLocation()
+
+  const getRedirectPage = () => {
+    const isPrivateRoute = privateRoutes.findIndex(({ path }) => path === location.pathname) > -1
+    return isPrivateRoute ? AllRoutes.LOGIN : AllRoutes.INDEX
+  }
 
   return (
     <>
@@ -14,7 +24,7 @@ export const AppRouter = () => {
         {publicRoutes.map(({ path, component }) => (
           <Route key={path} path={path} component={component} exact />
         ))}
-        <Redirect to={AllRoutes.INDEX} />
+        <Redirect to={getRedirectPage()} />
       </Switch>
     </>
   )
