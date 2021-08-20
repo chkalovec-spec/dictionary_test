@@ -1,12 +1,12 @@
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
+import { useAppSelector } from '../store'
 import { selectUserInfo } from '../store/userSlice'
 
 import { AllRoutes, privateRoutes, publicRoutes } from '../constants/router'
 
 export const AppRouter = () => {
-  const { isAuth } = useSelector(selectUserInfo)
+  const { isAuth } = useAppSelector(selectUserInfo)
   const location = useLocation()
 
   const getRedirectPage = () => {

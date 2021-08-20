@@ -1,7 +1,7 @@
 import { Container } from 'react-bootstrap'
 
 import { AppRouter } from './pages/AppRouter'
-import { NavMenu } from './components/Navbar'
+import { NavMenu } from './components/NavMenu'
 
 function App() {
   return (
