@@ -8,7 +8,9 @@ function App() {
     <>
       <NavMenu />
       <Container fluid='lg'>
-        <AppRouter />
+        <main className='py-4'>
+          <AppRouter />
+        </main>
       </Container>
     </>
   )

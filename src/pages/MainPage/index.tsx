@@ -1,7 +1,9 @@
 export const MainPage = () => {
   return (
     <>
-      <div>Main page</div>
+      <div>
+        <h1>Добро пожаловать в справочники!</h1>
+      </div>
     </>
   )
 }

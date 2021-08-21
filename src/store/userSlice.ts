@@ -16,6 +16,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state) => {
+      localStorage.setItem('isAuth', 'true')
       state.isAuth = true
     },
   },
