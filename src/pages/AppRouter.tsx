@@ -1,12 +1,10 @@
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom'
 
-import { useAppSelector } from '../store'
-import { selectUserInfo } from '../store/userSlice'
-
 import { AllRoutes, privateRoutes, publicRoutes } from '../constants/router'
+import { useAuth } from '../hooks/useAuth'
 
 export const AppRouter = () => {
-  const { isAuth } = useAppSelector(selectUserInfo)
+  const { isAuth } = useAuth()
   const location = useLocation()
 
   const getRedirectPage = () => {

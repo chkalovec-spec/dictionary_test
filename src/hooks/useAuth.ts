@@ -1,4 +1,6 @@
 import { useCallback } from 'react'
+import { useAppDispatch, useAppSelector } from '../store'
+import { selectUserInfo, setUser } from '../store/userSlice'
 
 type LogInProps = {
   username: string
@@ -6,13 +8,19 @@ type LogInProps = {
 }
 
 export const useAuth = () => {
-  const logIn = useCallback(({ password, username }: LogInProps) => {
-    if (username === 'admin' && password === '12345678') {
-      localStorage.setItem('isAuth', 'true')
-      return true
-    }
-    return false
-  }, [])
+  const dispatch = useAppDispatch()
+  const { isAuth } = useAppSelector(selectUserInfo)
 
-  return { logIn }
+  const logIn = useCallback(
+    ({ password, username }: LogInProps) => {
+      if (username === 'admin' && password === '12345678') {
+        dispatch(setUser())
+        return true
+      }
+      return false
+    },
+    [dispatch],
+  )
+
+  return { logIn, isAuth }
 }
