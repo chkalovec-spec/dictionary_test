@@ -6,7 +6,7 @@ import throttle from 'lodash/throttle'
 import { Dictionary, getDictionaries } from '../database'
 
 const initialCountDictionaries = 10
-const initialDictionaries = getDictionaries()
+let initialDictionaries = getDictionaries()
 
 export const useDictionaries = () => {
   const [dictionaries, setDictionaries] = useState<Dictionary[]>(initialDictionaries)
@@ -33,13 +33,16 @@ export const useDictionaries = () => {
   const deleteDictionary = useCallback(
     (id: string) => {
       setDictionaries([...dictionaries.filter((d) => d.id !== id)])
+      initialDictionaries = initialDictionaries.filter((d) => d.id !== id)
     },
     [dictionaries],
   )
 
   const addDictionary = useCallback(
     ({ title, description }: { title: string; description: string }) => {
-      setDictionaries((prevState) => [{ id: nanoid(), title, description }, ...prevState])
+      const newDict = { id: nanoid(), title, description }
+      setDictionaries((prevState) => [newDict, ...prevState])
+      initialDictionaries.unshift(newDict)
     },
     [],
   )
@@ -51,7 +54,7 @@ export const useDictionaries = () => {
           ...dictionaries.filter((d) => d.title.toLowerCase().includes(query.toLowerCase())),
         ])
       } else {
-        setDictionaries(dictionaries)
+        setDictionaries(initialDictionaries)
       }
     },
     [dictionaries],
