@@ -32,6 +32,7 @@ export const DictionaryForm: React.FC<DictionaryFormProps> = ({ handleClose, han
         title,
         description,
       })
+      handleClose()
     }
   }
 
