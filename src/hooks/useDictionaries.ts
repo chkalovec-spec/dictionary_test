@@ -51,7 +51,7 @@ export const useDictionaries = () => {
           ...dictionaries.filter((d) => d.title.toLowerCase().includes(query.toLowerCase())),
         ])
       } else {
-        setDictionaries(initialDictionaries)
+        setDictionaries(dictionaries)
       }
     },
     [dictionaries],
